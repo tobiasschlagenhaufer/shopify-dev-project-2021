@@ -6,21 +6,11 @@ const imageController = require('../controllers/image.controller');
 
 const router = express.Router();
 
-const multer = require('multer');
-var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-      cb(null, 'uploads')
-  },
-  filename: (req, file, cb) => {
-      cb(null, file.fieldname + '-' + Date.now())
-  }
-});
-
-var upload = multer({ storage: storage });
+const uploadSingle = require('../middlewares/multer');
 
 router
   .route('/')
-  .post(auth('getUsers'), upload.single('file'), validate(imageValidation.uploadImage), imageController.uploadImage) // Use multer middleware to parse multipart form data
+  .post(auth('getUsers'), uploadSingle, validate(imageValidation.uploadImage), imageController.uploadImage) // Use multer middleware to parse multipart form data
   .get(auth('getUsers'), validate(imageValidation.getImages), imageController.getImages);
 
 router
