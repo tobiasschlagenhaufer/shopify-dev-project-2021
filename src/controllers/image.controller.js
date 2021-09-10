@@ -4,8 +4,6 @@ const catchAsync = require('../utils/catchAsync');
 const { imageService } = require('../services');
 
 const uploadImage = catchAsync(async (req, res) => {
-  console.log(req.file);
-  console.log(req.user);
   const image = await imageService.uploadImage(req.body, req.file, req.user);
   res.status(httpStatus.CREATED).send(image);
 });
