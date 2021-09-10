@@ -10,12 +10,12 @@ const uploadSingle = require('../middlewares/multer');
 
 router
   .route('/')
-  .post(auth('getUsers'), uploadSingle, validate(imageValidation.uploadImage), imageController.uploadImage) // Use multer middleware to parse multipart form data
+  .post(auth('uploadImage'), uploadSingle, validate(imageValidation.uploadImage), imageController.uploadImage) // Use multer middleware to parse multipart form data
   .get(auth('getUsers'), validate(imageValidation.getImages), imageController.getImages);
 
 router
   .route('/:imageId')
-  .get(auth('getUsers'), validate(imageValidation.getImage), imageController.getImage)
+  .get(auth('manageUsers'), validate(imageValidation.getImage), imageController.getImage)
   .patch(auth('manageUsers'), validate(imageValidation.updateImage), imageController.updateImage)
   .delete(auth('manageUsers'), validate(imageValidation.deleteImage), imageController.deleteImage);
 
