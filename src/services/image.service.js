@@ -20,7 +20,6 @@ const uploadImage = async (imageBody, file, user) => {
     data: fs.readFileSync(path.join('./uploads/' + file.filename)),
     contentType: 'image/png'
   }
-  console.log("made it")
   imageBody.user = user._id;
   return Image.create(imageBody);
 };
